@@ -53,7 +53,9 @@ impl<'a> Display for Level<'a> {
 
 #[derive(Copy, Clone, Debug, ValueEnum)]
 enum Format {
+    /// Similar to what `tracing_subscriber` outputs.
     Line,
+    /// Coloured json, with a level heading per line.
     JSON,
 }
 
@@ -78,6 +80,7 @@ struct Args {
     /// JSON pointer to the log level string.
     #[arg(short, long, default_value = "/level")]
     level_pointer: String,
+    /// What output format to use.
     #[arg(short, long, default_value_t = Format::Line)]
     format: Format,
 }
@@ -102,7 +105,10 @@ fn main() -> anyhow::Result<()> {
 fn format_line(line: &str, args: &Args) -> anyhow::Result<()> {
     let log_line: serde_json::Value = serde_json::from_str(&line)?;
 
-    if let Some(timestamp) = log_line.pointer(&args.timestamp_pointer).and_then(Value::as_str) {
+    if let Some(timestamp) = log_line
+        .pointer(&args.timestamp_pointer)
+        .and_then(Value::as_str)
+    {
         print!(
             "[{}]",
             Paint::new(timestamp).fg(yansi::Color::RGB(180, 180, 180))
@@ -172,7 +178,10 @@ fn format_line(line: &str, args: &Args) -> anyhow::Result<()> {
         )
     );
 
-    if let Some(message) = log_line.pointer(&args.message_pointer).and_then(Value::as_str) {
+    if let Some(message) = log_line
+        .pointer(&args.message_pointer)
+        .and_then(Value::as_str)
+    {
         print!(": {message}");
     }
 
