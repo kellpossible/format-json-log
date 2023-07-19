@@ -2,6 +2,12 @@
 
 A command line tool to format format json structured log message lines from stdin into ANSI coloured stdout.
 
+## Installation
+
+Install using `cargo install format-json-log`.
+
+## Usage
+
 ```
 Usage: format-json-log [OPTIONS]
 
@@ -32,4 +38,24 @@ Options:
 
   -h, --help
           Print help (see a summary with '-h')
+```
+
+## `k9s` Plugin
+
+This tool was originally designed to be used to format json log messages as a plugin in `k9s`.
+
+In `~/.config/k9s/plugin.yml` put the following:
+
+```yaml
+plugin:
+  pinologs:
+    shortCut: Shift-L
+    description: "attach (pretty)"
+    scopes:
+      - po
+    command: bash
+    args:
+      - "-i"
+      - "-c"
+      - "kubectl logs -f $NAME -n $NAMESPACE --context $CONTEXT | format-json-log"
 ```
