@@ -48,7 +48,7 @@ In `~/.config/k9s/plugin.yml` put the following:
 
 ```yaml
 plugin:
-  pinologs:
+  formatjsonlog:
     shortCut: Shift-L
     description: "attach (pretty)"
     scopes:
