@@ -1,6 +1,10 @@
 [package]
 name = "format-json-log"
+authors = ["Luke Frisken <l.frisken@gmail.com>"]
+description = "A command line tool to format format json structured log message lines from stdin into ANSI coloured stdout."
 version = "0.1.0"
+license = "MIT"
+repository = "https://github.com/kellpossible/format-json-log"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
